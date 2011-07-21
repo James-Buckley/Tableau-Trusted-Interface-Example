@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sso</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <%- unless current_user -%>
+    <p><%= link_to 'Login', login_reports_path %></p>
+  <%- else -%>
+    <p>Welcome <%= current_user %>, <%= link_to 'Logout', logout_reports_path %></p>
+  <%- end -%>
+  <%= flash[:error] %>
+  <%= yield %>
+</body>
+</html>
