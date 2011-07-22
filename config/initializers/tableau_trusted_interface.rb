@@ -11,7 +11,7 @@ class TableauTrustedInterface
 
   ## class method because we will need to access this elsewhere in singleton mode
   def self.config
-    @@config ||= YAML::load(ERB.new((IO.read("#{RAILS_ROOT}/config/tableau.yml"))).result)[Rails.env].symbolize_keys
+    @@config ||= YAML::load(ERB.new((IO.read("#{::Rails.root.to_s}/config/tableau.yml"))).result)[Rails.env].symbolize_keys
   end
 
   def server
