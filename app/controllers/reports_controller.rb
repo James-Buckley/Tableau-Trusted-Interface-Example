@@ -1,11 +1,10 @@
 class ReportsController < ApplicationController
   before_filter :login_required, :except => [:index, :login]
-  before_filter :connect_to_tableau, :only => :view
+  before_filter :connect_to_tableau, :only => [:iframe,:javascript]
 
-  def view
+  def iframe
     @tabpath   = '/views/Finance/InvestinginDJIA'
-    @tabparams = ':embed=yes&:comments=ro&:toolbar=no'
-    @ticket    = @tableau.get_trusted_ticket(current_user, request.remote_ip)
+    @tabparams = ':embed=yes&:comments=no&:toolbar=no'
     if @ticket > 0
       @tableau_url = "#{@tableau.server}/trusted/#{@ticket}/#{@tabpath}?#{@tabparams}"
     else
@@ -14,11 +13,16 @@ class ReportsController < ApplicationController
     end
   end
 
+  def javascript
+    @tabpath   = "trusted/#{@ticket}/views/Finance/InvestinginDJIA"
+  end
+
   protected
   def login_required
     redirect_to reports_url unless current_user
   end
   def connect_to_tableau
     @tableau = TableauTrustedInterface.new
+    @ticket    = @tableau.get_trusted_ticket(current_user, request.remote_ip)
   end
 end

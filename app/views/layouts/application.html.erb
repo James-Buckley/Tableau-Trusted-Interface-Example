@@ -7,11 +7,19 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <%- unless current_user -%>
-    <p><%= link_to 'Login', login_reports_path %></p>
-  <%- else -%>
-    <p>Welcome <%= current_user %>, <%= link_to 'Logout', logout_reports_path %></p>
-  <%- end -%>
+  <div style='margin-left:20px;'>
+    <%- unless current_user -%>
+      <p><%= link_to 'Login', login_reports_path %></p>
+    <%- else -%>
+      <p>Welcome <%= current_user %>, <%= link_to 'Logout', logout_reports_path %></p>
+      <p>
+        <%= link_to 'iframe example', iframe_reports_path %>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= link_to 'javascript example', javascript_reports_path %>
+      </p>
+    <%- end -%>
+  </div>
+
   <%= flash[:error] %>
   <%= yield %>
 </body>

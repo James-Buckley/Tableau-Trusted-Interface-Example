@@ -13,7 +13,8 @@ Sso::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   resources :reports do
     collection do
-      get :view
+      get :iframe
+      get :javascript
       post :login
       get :logout
       get :access_denied

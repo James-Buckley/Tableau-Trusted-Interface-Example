@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def login
     if params[:login] && params[:login][:username] && params[:login][:username].present?
       session[:current_user] = params[:login][:username]
-      redirect_to view_reports_path
+      redirect_to iframe_reports_path
     else
       flash[:error] = "You must specify a username to log in"
       redirect_to reports_url
